@@ -60,13 +60,6 @@ layoutClass: gap-16
 
 # Table of contents
 
-You can use the `Toc` component to generate a table of contents for your slides:
-
-```html
-<Toc minDepth="1" maxDepth="1"></Toc>
-```
-
-The title will be inferred from your slide content, or you can override it with `title` and `level` in your frontmatter.
 
 ::right::
 
@@ -110,12 +103,13 @@ transition: slide-up
 
 # Our Implementation
 
-In our implementation we have used a DHT11 sensor to collect the temperature and humidity values, a BMP180 sensor to collect the pressure values and a SDS sensor to collect the pm2.5 and pm10 values. We have also used a relay to control the fan and a servo motor to control the window.
-
-- 📝 **Data Collection** - focus on collecting data in the form of humidity, temperature, pressure, pm2.5 and pm10 values
-- 🛠 **Hackable** - allows the user to turn on or off the fan manually or setting it to automatic depending on user-modified thresholds
-- 🧑‍💻 **Developer Friendly** - all graphs and visualizations available on an online dashboard 
-- 🤹 **Interactive** - modifiable dashboard built using Thingspeak REST api and Matlab Visualizations
+In our implementation we have used the following sensors:
+- two DHT11 sensor to collect the temperature and humidity values
+- BME280 sensor to collect the pressure values
+- SDS sensor to collect the pm2.5 and pm10 values. (It however stopped working after a few days)
+- We have used PC fans to control airflow, both the fans blow inside to increase the pressure. The fans given to us are unidirectional so we cannot decrease the pressure in the room by inverting the polarity.
+- 
+- A Thingspeak MQTT server to save and receive data.
 
 <!--
 You can have `style` tag in markdown to override the style for the current page.

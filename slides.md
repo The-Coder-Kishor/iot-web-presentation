@@ -5,12 +5,9 @@ theme: seriph
 # like them? see https://unsplash.com/collections/94734566/slidev
 # some information about your slides, markdown enabled
 background: https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Fiot-background&psig=AOvVaw3Flz-zj8ncTlqqL79o1M-W&ust=1714068928520000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCKDGv76624UDFQAAAAAdAAAAABAJ
-title: Welcome to Slidev
+title: Personalized Climate Control Project
 info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
-
-  Learn more at [Sli.dev](https://sli.dev)
+  ## Presentation for the IoT Project
 # apply any unocss classes to the current slide
 class: text-center
 # https://sli.dev/custom/highlighters.html
@@ -41,10 +38,7 @@ mdc: true
 </div>
 
 <div class="abs-br m-6 flex gap-2">
-  <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon:edit />
-  </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" alt="GitHub" title="Open in GitHub"
+  <a href="https://github.com/The-Coder-Kishor/iot-web-presentation" target="_blank" alt="GitHub" title="Open in GitHub"
     class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
     <carbon-logo-github />
   </a>
@@ -72,13 +66,13 @@ transition: slide-up
 ---
 
 # Motivation Behind the Project
+<v-click>
+The motivation behind the project was to create a proper working HVAC modelwhich can be used to adjust the environmental conditions according to the needs of the individual. Data collected over time from such a physical model can be later used to create much better ai agents that can optimize the energy consumption of the HVAC system.
 
-The motivation behind the project was to create a proper working HVAC model which can be used to adjust the environmental conditions according to the needs of the individual. Data collected over time from such a physical model can be later used to create much better ai agents that can optimize the energy consumption of the HVAC system.
-
-- 📝 **Data Collection** - focus on collecting data in the form of humidity, temperature, pressure, pm2.5 and pm10 values
-- 🛠 **Hackable** - to allow the user to modify thresholds and turn actuators on and off
-- 🧑‍💻 **Developer Friendly** - to create a user accessible dashboard to show all the values, threshold and buttons that the user can use to get data about the room
-
+- 📝 **Data Collection** - <span v-mark.underline.orange="1"> focus on collecting data in the form of humidity, temperature, pressure, pm2.5 and pm10 values </span>
+- 🛠 **Hackable** - <span v-mark.underline.orange="2"> to allow the user to modify thresholds and turn actuators on and off </span>
+-  🧑‍💻 **Developer Friendly** - <span v-mark.underline.orange="3"> to create a user accessible dashboard to show all the values, threshold and buttons that the user can use to get data about the room </span> 
+</v-click>
 <!--
 You can have `style` tag in markdown to override the style for the current page.
 Learn more: https://sli.dev/guide/syntax#embedded-styles
@@ -104,12 +98,16 @@ transition: slide-up
 # Our Implementation
 
 In our implementation we have used the following sensors:
-- two DHT11 sensor to collect the temperature and humidity values
-- BME280 sensor to collect the pressure values
-- SDS sensor to collect the pm2.5 and pm10 values. (It however stopped working after a few days)
-- We have used PC fans to control airflow, both the fans blow inside to increase the pressure. The fans given to us are unidirectional so we cannot decrease the pressure in the room by inverting the polarity.
-- 
-- A Thingspeak MQTT server to save and receive data.
+- two <span v-mark.underline.orange="1">DHT11 sensor to collect the temperature and humidity values</span>
+- <span v-mark.underline.orange="2">BME280 sensor </span>to collect the pressure values
+- <span v-mark.underline.orange="3">SDS sensor to collect the pm2.5 and pm10 values.</span> (It however stopped working after a few days)
+- We have used <span v-mark.underline.orange="4"> PC fans </span> to control airflow, both the fans blow inside to increase the pressure. The fans given to us are unidirectional so we cannot decrease the pressure in the room by inverting the polarity.
+- An <span v-mark.underline.orange="5"> ESP32 Dev Module </span> as the interface between the sensors, actuators and the MQTT server
+- An <span v-mark.underline.orange="6"> L298N Motor Driver </span> to drive the fans
+- <span v-mark.underline.orange="7"> 12V Power Module </span> which can supply 3.3V, 5V and 12V which we require for the sensors, the ESP and the fans respectively.
+- A <span v-mark.underline.orange="8">Thingspeak MQTT </span>server to save and receive data.
+- A <span v-mark.underline.orange="9"> dashboard that updates itself </span> with new data and allows the user tochange their preferences for the HVAC system.
+
 
 <!--
 You can have `style` tag in markdown to override the style for the current page.
@@ -131,532 +129,50 @@ h1 {
 <!--
 Here is another comment.
 -->
+---
+transition: slide-up
+
+---
+
+# Our Dashboard (Data and Data Analysis)
+
+You can open the publicly hosted dashboard [here](https://the-coder-kishor.github.io/iot_web_dashboard/)
+
+<iframe src="https://the-coder-kishor.github.io/iot_web_dashboard/" title="dashboard" style="height:45vh; width:45vw;"></iframe>
 
 ---
 transition: slide-up
-level: 2
 ---
 
-# Navigation
+# Failure analysis of the prototype
 
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/navigation.html)
+The air quality sensor (SDS) fried up likely due to electrical overload or other unknown reasons, rendering it useless for air quality sensing.
 
-## Keyboard Shortcuts
+The different cases where our prototype would likely fail are:-
 
-|     |     |
-| --- | --- |
-| <kbd>right</kbd> / <kbd>space</kbd>| next animation or slide |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd> | previous slide |
-| <kbd>down</kbd> | next slide |
-
-<!-- https://sli.dev/guide/animations.html#click-animations -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-  alt=""
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
-
-
+1) Communication errors: Loss of Wifi connectivity and the entire setup can only be run when one of use is present in the room which means we were not able to capture much data during the mornings (when there were classes)
+2) Mechanical issues: The given fan is unidirectional so were not able to switch its direction per will extremely reducing the operational freedom of the project
+3) Wear and Tear of the components: The 12V power supply being used to power the fan, the esp and the sensors had immense static build up which was causing a serious problem.
+5) Sensor inaccuracies: The SDS sensor which was providing us pm2.5 and pm10 sensors used to work in the beginning but then stopped working with no specific cause
+6) Power Failures, Short circuits etc..
 
 ---
-layout: image-right
-image: https://cover.sli.dev
+transition: slide-up
 ---
 
-# Code
+# Next Steps
 
-Use code snippets and get the highlighting directly, and even types hover![^1]
+The next possible steps include:-
 
-```ts {all|5|7|7-8|10|all} twoslash
-// TwoSlash enables TypeScript hover information
-// and errors in markdown code blocks
-// More at https://shiki.style/packages/twoslash
-
-import { computed, ref } from 'vue'
-
-const count = ref(0)
-const doubled = computed(() => count.value * 2)
-
-doubled.value = 2
-```
-
-<arrow v-click="[4, 5]" x1="350" y1="310" x2="195" y2="334" color="#953" width="2" arrowSize="1" />
-
-<!-- This allow you to embed external code blocks -->
-<<< @/snippets/external.ts#snippet
-
-<!-- Footer -->
-[^1]: [Learn More](https://sli.dev/guide/syntax.html#line-highlighting)
-
-<!-- Inline style -->
-<style>
-.footnotes-sep {
-  @apply mt-5 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
-
-<!--
-Notes can also sync with clicks
-
-[click] This will be highlighted after the first click
-
-[click] Highlighted with `count = ref(0)`
-
-[click:3] Last click (skip two clicks)
--->
-
+1) Develop an intuitive and user-friendly app for users to set preferences, view real-time data, and receive alerts or notifications.
+2) Integrate the climate control system with existing smart home platforms for seamless operation and compatibility with other smart devices.
+3) Get better sensors, coolers and other actuators which can "actually" cool the environment.
+4) This time we were not able to make a closed model to try stuff on because components would break often, so that is one thing we need to implement in the future.
+5) Use the data taken from the project to create AI models that can be used for optimizing energy usage (the most important use of such a project).
 ---
-level: 2
+transition: slide-up
 ---
 
-# Shiki Magic Move
+# Thank You
 
-Powered by [shiki-magic-move](https://shiki-magic-move.netlify.app/), Slidev supports animations across multiple code snippets.
-
-Add multiple code blocks and wrap them with <code>````md magic-move</code> (four backticks) to enable the magic move. For example:
-
-````md magic-move
-```ts {*|2|*}
-// step 1
-const author = reactive({
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-})
-```
-
-```ts {*|1-2|3-4|3-4,8}
-// step 2
-export default {
-  data() {
-    return {
-      author: {
-        name: 'John Doe',
-        books: [
-          'Vue 2 - Advanced Guide',
-          'Vue 3 - Basic Guide',
-          'Vue 4 - The Mystery'
-        ]
-      }
-    }
-  }
-}
-```
-
-```ts
-// step 3
-export default {
-  data: () => ({
-    author: {
-      name: 'John Doe',
-      books: [
-        'Vue 2 - Advanced Guide',
-        'Vue 3 - Basic Guide',
-        'Vue 4 - The Mystery'
-      ]
-    }
-  })
-}
-```
-
-Non-code blocks are ignored.
-
-```vue
-<!-- step 4 -->
-<script setup>
-const author = {
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-}
-</script>
-```
-````
-
----
-
-# Components
-
-<div grid="~ cols-2 gap-4">
-<div>
-
-You can use Vue components directly inside your slides.
-
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
-
-```html
-<Counter :count="10" />
-```
-
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
-</div>
-<div>
-
-```html
-<Tweet id="1390115482657726468" />
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
-
-<!--
-Presenter note with **bold**, *italic*, and ~~striked~~ text.
-
-Also, HTML elements are valid:
-<div class="flex w-full">
-  <span style="flex-grow: 1;">Left content</span>
-  <span>Right content</span>
-</div>
--->
-
----
-class: px-20
----
-
-# Themes
-
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
-
-<div grid="~ cols-2 gap-2" m="t-2">
-
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true" alt="">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true" alt="">
-
-</div>
-
-Read more about [How to use a theme](https://sli.dev/themes/use.html) and
-check out the [Awesome Themes Gallery](https://sli.dev/themes/gallery.html).
-
----
-
-# Clicks Animations
-
-You can add `v-click` to elements to add a click animation.
-
-<div v-click>
-
-This shows up when you click the slide:
-
-```html
-<div v-click>This shows up when you click the slide.</div>
-```
-
-</div>
-
-<br>
-
-<v-click>
-
-The <span v-mark.red="3"><code>v-mark</code> directive</span>
-also allows you to add
-<span v-mark.circle.orange="4">inline marks</span>
-, powered by [Rough Notation](https://roughnotation.com/):
-
-```html
-<span v-mark.underline.orange>inline markers</span>
-```
-
-</v-click>
-
-<div mt-20 v-click>
-
-[Learn More](https://sli.dev/guide/animations#click-animations)
-
-</div>
-
----
-
-# Motions
-
-Motion animations are powered by [@vueuse/motion](https://motion.vueuse.org/), triggered by `v-motion` directive.
-
-```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }"
-  :click-3="{ x: 80 }"
-  :leave="{ x: 1000 }"
->
-  Slidev
-</div>
-```
-
-<div class="w-60 relative">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-square.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-circle.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-triangle.png"
-      alt=""
-    />
-  </div>
-
-  <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
-
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
-}
-</script>
-
-<div
-  v-motion
-  :initial="{ x:35, y: 30, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
-
-[Learn More](https://sli.dev/guide/animations.html#motion)
-
-</div>
-
----
-
-# LaTeX
-
-LaTeX is supported out-of-box powered by [KaTeX](https://katex.org/).
-
-<br>
-
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-$$ {1|3|all}
-\begin{array}{c}
-
-\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &
-= \frac{4\pi}{c}\vec{\mathbf{j}}    \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
-
-\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
-
-\nabla \cdot \vec{\mathbf{B}} & = 0
-
-\end{array}
-$$
-
-<br>
-
-[Learn more](https://sli.dev/guide/syntax#latex)
-
----
-
-# Diagrams
-
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
-
-<div class="grid grid-cols-4 gap-5 pt-4 -mb-6">
-
-```mermaid {scale: 0.5, alt: 'A simple sequence diagram'}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
-
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
-
-```mermaid
-mindmap
-  root((mindmap))
-    Origins
-      Long history
-      ::icon(fa fa-book)
-      Popularisation
-        British popular psychology author Tony Buzan
-    Research
-      On effectiveness<br/>and features
-      On Automatic creation
-        Uses
-            Creative techniques
-            Strategic planning
-            Argument mapping
-    Tools
-      Pen and paper
-      Mermaid
-```
-
-```plantuml {scale: 0.7}
-@startuml
-
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
-
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
-
-cloud {
-  [Example 1]
-}
-
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
-  }
-  frame "Foo" {
-    [Frame 4]
-  }
-}
-
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
-
-@enduml
-```
-
-</div>
-
-[Learn More](https://sli.dev/guide/syntax.html#diagrams)
-
----
-foo: bar
-dragPos:
-  square: 682,41,167,_,-16
----
-
-# Draggable Elements
-
-Double-click on the draggable elements to edit their positions.
-
-<br>
-
-###### Directive Usage
-
-```md
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-```
-
-<br>
-
-###### Component Usage
-
-```md
-<v-drag text-3xl>
-  <carbon:arrow-up />
-  Use the `v-drag` component to have a draggable container!
-</v-drag>
-```
-
-<v-drag pos="671,205,253,_,-15">
-  <div text-center text-3xl border border-main rounded>
-    Double-click me!
-  </div>
-</v-drag>
-
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-
----
-src: ./pages/multiple-entries.md
-hide: false
----
-
----
-
-# Monaco Editor
-
-Slidev provides built-in Monaco Editor support.
-
-Add `{monaco}` to the code block to turn it into an editor:
-
-```ts {monaco}
-import { ref } from 'vue'
-import { emptyArray } from './external'
-
-const arr = ref(emptyArray(10))
-```
-
-Use `{monaco-run}` to create an editor that can execute the code directly in the slide:
-
-```ts {monaco-run}
-import { version } from 'vue'
-import { emptyArray, sayHello } from './external'
-
-sayHello()
-console.log(`vue ${version}`)
-console.log(emptyArray<number>(10).reduce(fib => [...fib, fib.at(-1)! + fib.at(-2)!], [1, 1]))
-```
-
----
-layout: center
-class: text-center
----
-
-# Learn More
-
-[Documentations](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/showcases.html)
+The pdf of the presentation is available [here]()

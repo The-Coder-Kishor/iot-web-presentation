@@ -175,4 +175,4 @@ transition: slide-up
 
 # Thank You
 
-The pdf of the presentation is available [here]()
+The pdf of the presentation is available [here](https://github.com/The-Coder-Kishor/iot-web-presentation/blob/main/pdf/slides-export.pdf)
